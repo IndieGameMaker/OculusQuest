@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class GrabManager : MonoBehaviour
 {
-    private Transform tr;
     private GameObject grabObject;
+    private FixedJoint joint;
     private bool isTouched = false;
 
     void Start()
     {
-        tr = GetComponent<Transform>();
+        joint = GetComponent<FixedJoint>();
     }
 
     void OnTriggerEnter(Collider coll)
@@ -18,6 +18,16 @@ public class GrabManager : MonoBehaviour
         if (coll.CompareTag("BALL"))
         {
             isTouched = true;
+            grabObject = coll.gameObject;
+        }
+    }
+
+    void Update()
+    {
+        if (isTouched == false
+            && OVRInput.GetDown(OVRInput.Button.SecondaryHandTrigger))
+        {
+            
         }
     }
 }
